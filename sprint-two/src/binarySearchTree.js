@@ -23,7 +23,7 @@ binaryTreeMethods.insert = function(value){
         levels++
         recurse(node.left)
       }
-    } else if(value > node.value){
+    } else {
       if(node.right === undefined){
         node.right = makeBinarySearchTree(value)
         return
@@ -32,6 +32,7 @@ binaryTreeMethods.insert = function(value){
         recurse(node.right)
       }
     }
+    // throw error for 0
   }
   recurse(this)
   if(levels > this.maxDepth){
@@ -41,8 +42,7 @@ binaryTreeMethods.insert = function(value){
     this.minDepth = levels
   }
   if((this.minDepth*2) < this.maxDepth){
-    var tree = this
-    tree = this.rebalance()
+    var tree = this.rebalance()
   }
 };
 
@@ -64,7 +64,7 @@ binaryTreeMethods.contains = function(value){
   recurse(this)
   return result
 };
-
+//  rename recurse function name
 binaryTreeMethods.rebalance = function(){
   var arrayHolder = []
   var recurse = function(node){
@@ -75,15 +75,13 @@ binaryTreeMethods.rebalance = function(){
     if(node.right !== undefined){
       recurse(node.right)
     }
-    return
   }
   recurse(this)
   var sortedArray = arrayHolder.sort()
-  var topNode = sortedArray[Math.floor(sortedArray.length/2)]
+  // expand upon sort function to fix 1,11,2 problem
+  // var topNode = sortedArray[Math.floor(sortedArray.length/2)]
   var recurse2 = function(array){
-    if(array.length === 0){
-      return
-    } else{
+    if(array.length !== 0){
       var parent = makeBinarySearchTree(array[Math.floor(array.length / 2)])
       parent.left = recurse2(array.slice(0, parent-1))
       parent.right = recurse2(array.slice(parent+1,array.length-1))
@@ -97,7 +95,7 @@ binaryTreeMethods.breadthFirstLog = function(){
   console.log(this.value)
   var recurse = function(node){
     if(node.left != undefined){
-    console.log(node.left.value)
+      console.log(node.left.value)
     }
     if(node.right != undefined){
       console.log(node.right.value)
