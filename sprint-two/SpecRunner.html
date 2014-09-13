@@ -3,10 +3,17 @@
     <meta charset="utf-8">
     <title>Mocha Tests</title>
     <link rel="stylesheet" href="../lib/mocha/mocha.css" />
+    <link rel="stylesheet" href="../lib/jquery-ui/jquery-ui.css"/>
+        <link rel="stylesheet" href="../lib/jquery-ui/jquery-ui.structure.css"/>
+    <link rel="stylesheet" href="../lib/jquery-ui/jquery-ui.theme.css"/>
+
     <script src="../lib/jquery/jquery.js"></script>
     <script src="../lib/mocha/mocha.js"></script>
     <script src="../lib/chai/chai.js"></script>
     <script src="../lib/underscore/underscore.js"></script>
+    <script src="../lib/jquery-ui/jquery-ui.min.js"></script>
+
+
     <script>
       mocha.setup('bdd');
       window.expect = chai.expect;
@@ -18,6 +25,8 @@
     <!-- source files -->
     <script type="text/javascript" src="src/linkedList.js"></script>
     <script type="text/javascript" src="src/tree.js"></script>
+    <script type="text/javascript" src="src/t9.js"></script>
+
     <script type="text/javascript" src="src/bloom.js"></script>
 
     <script type="text/javascript" src="src/set.js"></script>
@@ -45,6 +54,14 @@
  -->
   </head>
   <body>
+    <input id="t9Input" type="text">
+    <p id="display">Words here</p>
+    <script>
+      $(document).ready(function(){
+        $("#t9Input").autocomplete({source:newTree.getPossibleWords($(this).val())
+        })
+      })
+    </script>
     <div id="mocha"></div>
   </body>
 </html>
